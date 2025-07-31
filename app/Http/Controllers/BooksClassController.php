@@ -12,7 +12,9 @@ class BooksClassController extends Controller
      */
     public function index()
     {
-       return view('add_books_class');
+       return view('admin.books-classes.index', [
+            'bookClasses' => BooksClass::all(),
+        ]);
     }
 
     /**
@@ -20,7 +22,9 @@ class BooksClassController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.books-classes.create', [
+            'bookClasses' => BooksClass::all(),
+        ]);
     }
 
     /**
@@ -38,7 +42,7 @@ class BooksClassController extends Controller
     $class->name = $request->name;
     $class->save();
 
-    return redirect()->route('books-classes.index')->with('message', 'Book class added successfully!');
+    return redirect()->route('admin.books-classes.index')->with('success', 'Book class created successfully.');
 }
 
 

@@ -1,29 +1,26 @@
-    <?php
+<?php
 
-    namespace App\Models;
+namespace App\Models;
 
-    use Illuminate\Database\Eloquent\Factories\HasFactory;
-    use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
-    class BooksShelf extends Model
-    {
-        use HasFactory;
+class BooksShelf extends Model
+{
+    use HasFactory;
 
-
-        protected $fillable = [
-            'id_bookshelf',
-            'name',
-        ];
-        // BooksShelf.php
-    protected $primaryKey = 'id_bookshelf';
-    public $incrementing = true; // or false if needed
-
-    // optional table name
     protected $table = 'books_shelves';
+    protected $primaryKey = 'id_bookshelf';
+    public $incrementing = false; // <== WAJIB kalau pakai ID string
+    protected $keyType = 'string'; // <== WAJIB biar Laravel tahu ini string
 
-        public function inventory()
+    protected $fillable = [
+        'id_bookshelf',
+        'name',
+    ];
+
+    public function inventory()
     {
         return $this->hasMany(Inventory::class);
     }
-
-    }
+}

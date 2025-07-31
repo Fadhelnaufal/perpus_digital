@@ -6,6 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Books extends Model
 {
+    protected $table = 'books';
+
+    protected $primaryKey = 'id_books';
+    public $incrementing = false;
+    protected $keyType = 'string';
+
     protected $fillable = [
         'id_books',
         'title_books',
@@ -16,18 +22,6 @@ class Books extends Model
         'year_published',
         'qty_books',
         'img_books',
+        'id_bookshelf'
     ];
-    // Books.php
-protected $primaryKey = 'id_books';
-public $incrementing = true; // or false if it's not auto-increment
-
-// optional: if table name is custom
-protected $table = 'books';
-
-
-//     public function category()
-// {
-//     return $this->belongsTo(BooksClass::class, 'id_books_class', 'id_books_classes');
-// }
-
 }

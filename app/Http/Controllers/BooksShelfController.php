@@ -12,7 +12,9 @@ class BooksShelfController extends Controller
      */
     public function index()
     {
-        return view('add_books_shelf');
+        return view('admin.books-shelves.index', [
+            'bookShelfs' => BooksShelf::all(),
+        ]);
     }
 
     /**
@@ -20,7 +22,9 @@ class BooksShelfController extends Controller
      */
     public function create()
     {
-
+        return view('admin.books-shelves.create', [
+            'bookShelfs' => BooksShelf::all(),
+        ]);
 
     }
 
@@ -39,7 +43,7 @@ class BooksShelfController extends Controller
         $shelf->name = $request->name;
         $shelf->save();
 
-        return redirect()->route('books-shelf.index')->with('message', 'Bookshelf added successfully!');
+        return redirect()->route('admin.books-shelf.index')->with('success', 'Rak Buku berhasil ditambahkan.');
     }
 
     /**
