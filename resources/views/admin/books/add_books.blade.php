@@ -30,7 +30,7 @@
                                     </div>
 
                                     <div class="row">
-                                      
+
 
                                         <div class="col-lg-6 col-sm-6">
                                             <div class="form-group mb-4">
@@ -133,12 +133,10 @@
 
                                     <div class="form-group mb-4">
                                         <label class="label text-secondary">Category</label>
-                                        <select name="category" id="category" required
-                                            class="form-select form-control h-55">
-                                            <option value="">-- Select a Book Class --</option>
+                                        <select name="category" id="category" required class="form-control">
+                                            <option value="">-- Pilih Kategori --</option>
                                             @foreach ($bookClasses as $class)
-                                                <option value="{{ $class->id_books_classes }}">{{ $class->name }}
-                                                </option>
+                                                <option value="{{ $class->id_books_classes }}">{{ $class->id_books_classes }}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -155,8 +153,6 @@
                                 </div>
                             </div>
                         </div>
-
-
                     </div>
                 </form>
             </div>

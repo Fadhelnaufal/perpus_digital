@@ -108,7 +108,7 @@
                     </a>
                     <ul class="menu-sub {{ Request::is('admin/users*') ? 'show' : '' }}">
                         <li class="menu-item">
-                            <a href="{{ route('admin.users.index') }}"
+                           <a href="{{ route('admin.users.index') }}"
                                 class="menu-link {{ Request::is('admin/users') ? 'active' : '' }}">
                                 Add User and Role
                             </a>

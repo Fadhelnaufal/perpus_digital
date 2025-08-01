@@ -32,11 +32,6 @@
                         </div>
                     </div>
                 </div>
-
-                @if (session('success'))
-                    <div class="alert alert-success mx-3">{{ session('success') }}</div>
-                @endif
-
                 <div class="row">
                     <div class="col-lg">
                         <div class="card bg-white border-0 rounded-3 mb-4">
@@ -112,7 +107,10 @@
                                                                     class="btn-edit-user border-0 bg-transparent lh-1 position-relative top-2"
                                                                     data-bs-toggle="modal"
                                                                     data-bs-target="#editUserModal"
-                                                                    data-id="{{ $user->id }}">
+                                                                    data-id="{{ $user->id }}"
+                                                                    data-name="{{ $user->name }}"
+                                                                    data-email="{{ $user->email }}"
+                                                                    data-role="{{ $user->getRoleNames()->first() }}">
                                                                     <i
                                                                         class="material-symbols-outlined fs-16 text-success">edit</i>
                                                                 </button>
@@ -297,21 +295,16 @@
             editButtons.forEach(btn => {
                 btn.addEventListener("click", function() {
                     const userId = btn.dataset.id;
-                    const row = btn.closest('tr');
+                    const userName = btn.dataset.name;
+                    const userEmail = btn.dataset.email;
+                    const userRole = btn.dataset.role;
 
-                    const userName = row.querySelector('.user-name').textContent.trim();
-                    const userEmail = row.querySelector('.user-email').textContent.trim();
-                    const userRole = row.querySelector('.user-role').dataset.role; // dari data-role
-
-                    // Isi form modal
                     document.getElementById("edit-id").value = userId;
                     document.getElementById("edit-name").value = userName;
                     document.getElementById("edit-email").value = userEmail;
                     document.getElementById("edit-role").value = userRole;
 
-
-
-                    // Set action ke route update
+                    // set action
                     document.getElementById("editUserForm").action = `/admin/users/${userId}`;
                 });
             });

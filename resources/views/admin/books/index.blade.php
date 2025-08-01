@@ -38,73 +38,102 @@
 
                 <div class="row">
                     <div class="col-lg">
-                         <div class="card bg-white border-0 rounded-3 mb-4">
-                        <div class="card-body p-4">
-                            <div class="d-flex justify-content-between align-items-center flex-wrap gap-3 mb-4">
-                                <h3 class="mb-0">Daftar Buku</h3>
-                                <div class="d-flex align-items-center gap-2">
-                                    <a href="{{ route('admin.books.create') }}" class="btn btn-primary">
-                                        <i class="material-symbols-outlined align-middle">add</i> Tambah Buku
-                                    </a>
-                                    <button class="btn btn-secondary" id="exportButton">
-                                        <i class="material-symbols-outlined align-middle">download</i> Ekspor
-                                    </button>
+                        <div class="card bg-white border-0 rounded-3 mb-4">
+                            <div class="card-body p-4">
+                                <div class="d-flex justify-content-between align-items-center flex-wrap gap-3 mb-4">
+                                    <h3 class="mb-0">Daftar Buku</h3>
+                                    <div class="d-flex align-items-center gap-2">
+                                        <a href="{{ route('admin.books.create') }}" class="btn btn-primary">
+                                            <i class="material-symbols-outlined align-middle">add</i> Tambah Buku
+                                        </a>
+                                        <button class="btn btn-secondary" id="exportButton">
+                                            <i class="material-symbols-outlined align-middle">download</i> Ekspor
+                                        </button>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="default-table-area all-products">
-                                <div class="table-responsive">
-                                    <table class="table align-middle " id="myTable">
-                                        <thead>
-                                            <tr>
-                                                <th scope="col">ID Buku</th>
-                                                <th scope="col">Nama Buku</th>
-                                                <th scope="col">Penulis</th>
-                                                <th scope="col">Deskripsi</th>
-                                                <th scope="col">Jumlah Halaman</th>
-                                                <th scope="col">Penerbit</th>
-                                                <th scope="col">Tahun Terbit</th>
-                                                <th scope="col">Jumlah Buku</th>
-                                                <th scope="col">Aksi</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td class="text-body">#IPA0001</td>
-                                                <td>
-                                                    <div class="d-flex align-items-center">
-                                                        <img src="{{ asset('assets/images/user-6.jpg') }}" class="wh-40 rounded-3" alt="user">
-                                                        <div class="ms-2 ps-1">
-                                                            <h6 class="fw-medium fs-14 mb-0">Pembelajaran Fotosintesis</h6>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td class="text-secondary">Marcia Baker</td>
-                                                <td class="text-secondary">Pembelajaran Fotosintesis</td>
-                                                <td class="text-secondary">50</td>
-                                                <td class="text-secondary">Airlangga</td>
-                                                <td class="text-secondary">2024</td>
-                                                <td class="text-secondary">56</td>
-                                                <td>
-                                                    <div class="d-flex align-items-center gap-1">
-                                                        <button class="ps-0 border-0 bg-transparent lh-1 position-relative top-2" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="View">
-                                                            <i class="material-symbols-outlined fs-16 text-primary">visibility</i>
-                                                        </button>
-                                                        <button class="ps-0 border-0 bg-transparent lh-1 position-relative top-2" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Edit">
-                                                            <i class="material-symbols-outlined fs-16 text-body">edit</i>
-                                                        </button>
-                                                        <button class="ps-0 border-0 bg-transparent lh-1 position-relative top-2" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Delete">
-                                                            <i class="material-symbols-outlined fs-16 text-danger">delete</i>
-                                                        </button>
-                                                    </div>
-                                                </td>
-                                            </tr>
+                                <div class="default-table-area all-products">
+                                    <div class="table-responsive">
+                                        <table class="table align-middle " id="myTable">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">ID Buku</th>
+                                                    <th scope="col">Nama Buku</th>
+                                                    <th scope="col">Penulis</th>
+                                                    <th scope="col">Deskripsi</th>
+                                                    <th scope="col">Jumlah Halaman</th>
+                                                    <th scope="col">Penerbit</th>
+                                                    <th scope="col">Tahun Terbit</th>
+                                                    <th scope="col">Jumlah Buku</th>
+                                                    <th scope="col">Aksi</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @forelse ($books as $book)
+                                                    <tr>
+                                                        <td class="text-body">{{ $book->id_books }}</td>
+                                                        <td>
+                                                            <div class="d-flex align-items-center">
+                                                                <img src="{{ asset('storage/' . $book->img_books) }}"
+                                                                    class="wh-40 rounded-3" alt="book image">
+                                                                <div class="ms-2 ps-1">
+                                                                    <h6 class="fw-medium fs-14 mb-0">
+                                                                        {{ $book->title_books }}</h6>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td class="text-secondary">{{ $book->author }}</td>
+                                                        <td class="text-secondary">
+                                                            {{ Str::limit($book->description, 40) }}</td>
+                                                        <td class="text-secondary">{{ $book->pages }}</td>
+                                                        <td class="text-secondary">{{ $book->publisher }}</td>
+                                                        <td class="text-secondary">{{ $book->year_published }}</td>
+                                                        <td class="text-secondary">{{ $book->qty_books }}</td>
+                                                        <td>
+                                                            <div class="d-flex align-items-center gap-1">
+                                                                <button
+                                                                    class="ps-0 border-0 bg-transparent lh-1 position-relative top-2"
+                                                                    data-bs-toggle="tooltip" data-bs-placement="top"
+                                                                    data-bs-title="View">
+                                                                    <i
+                                                                        class="material-symbols-outlined fs-16 text-primary">visibility</i>
+                                                                </button>
+                                                                <button
+                                                                    class="ps-0 border-0 bg-transparent lh-1 position-relative top-2"
+                                                                    data-bs-toggle="tooltip" data-bs-placement="top"
+                                                                    data-bs-title="Edit">
+                                                                    <i
+                                                                        class="material-symbols-outlined fs-16 text-body">edit</i>
+                                                                </button>
+                                                                <form
+                                                                    action="{{ route('admin.books.destroy', $book->id_books) }}"
+                                                                    method="POST"
+                                                                    onsubmit="return confirm('Yakin ingin menghapus buku ini?')">
+                                                                    @csrf
+                                                                    @method('DELETE')
+                                                                    <button
+                                                                        class="ps-0 border-0 bg-transparent lh-1 position-relative top-2"
+                                                                        data-bs-toggle="tooltip" data-bs-placement="top"
+                                                                        data-bs-title="Delete">
+                                                                        <i
+                                                                            class="material-symbols-outlined fs-16 text-danger">delete</i>
+                                                                    </button>
+                                                                </form>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                @empty
+                                                    <tr>
+                                                        <td colspan="9" class="text-center text-muted">Belum ada data
+                                                            buku.</td>
+                                                    </tr>
+                                                @endforelse
+                                            </tbody>
 
-                                        </tbody>
-                                    </table>
+                                        </table>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
                     </div>
                 </div>
             </div>

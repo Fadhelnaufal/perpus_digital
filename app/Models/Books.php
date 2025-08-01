@@ -24,4 +24,6 @@ class Books extends Model
         'img_books',
         'id_bookshelf'
     ];
+
+    
 }

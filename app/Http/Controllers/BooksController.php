@@ -31,69 +31,67 @@ class BooksController extends Controller
 
 
 public function store(Request $request)
-{
-    $request->validate([
-        'title' => 'required',
-        'author' => 'required',
-        'description' => 'nullable',
-        'pages' => 'required|integer',
-        'publisher' => 'required',
-        'quantity' => 'required|integer',
-        'year_publish' => 'required|integer',
-        'category' => 'required',
-        'bookshelf' => 'required',
-        'image' => 'nullable|image|max:2048',
-    ]);
+    {
 
-    // 1. Ambil kode prefix dari BooksClass (misal 'BIO' atau 'BJW')
-    $bookClass = \App\Models\BooksClass::findOrFail($request->category);
-    $prefix = strtoupper($bookClass->code); // pastikan ada kolom 'code' seperti 'BIO'
+        // Validate the request data
+        // $request->validate([
+        //     'title_books' => 'required|string|max:255',
+        //     'author' => 'required|string|max:255',
+        //     'description' => 'required|string',
+        //     'pages' => 'required|integer',
+        //     'publisher' => 'required|string|max:255',
+        //     'year_published' => 'required|integer',
+        //     'qty_books' => 'required|integer',
+        //     'img_books' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+        //     'id_bookshelf' => 'required|exists:books_shelves,id_bookshelf',
+        // ]);
+        $validated = $request->validate([
+            'title' => 'required|string',
+            'author' => 'required|string',
+            'description' => 'required|string',
+            'pages' => 'required|numeric',
+            'publisher' => 'required|string',
+            'quantity' => 'required|numeric',
+            'year_publish' => 'required|numeric',
+            'category' => 'required|string',
+        'bookshelf' => 'required|exists:books_shelves,id_bookshelf', // ✅ perbaiki di sini
+            'image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+        ]);
 
-    // 2. Cari ID terakhir untuk kategori ini
-    $lastBookId = CategoryBook::where('id_book_class', $request->category)
-        ->join('books', 'category_books.id_books', '=', 'books.id_books')
-        ->orderBy('books.id_books', 'desc')
-        ->pluck('books.id_books')
-        ->first();
+        // Generate ID
+        $prefix = strtoupper(Str::substr($request->category, 0, 3));
+        $lastBook = Books::where('id_books', 'like', "{$prefix}%")
+                        ->orderBy('id_books', 'desc')
+                        ->first();
 
-    // 3. Hitung angka terakhir dan generate ID baru
-    if ($lastBookId && strpos($lastBookId, $prefix) === 0) {
-        $number = (int)substr($lastBookId, strlen($prefix)) + 1;
-    } else {
-        $number = 1;
+        $newNumber = $lastBook
+            ? (int) substr($lastBook->id_books, strlen($prefix)) + 1
+            : 1;
+
+        $newId = $prefix . str_pad($newNumber, 4, '0', STR_PAD_LEFT);
+
+        // Upload image
+        $imagePath = null;
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('books', 'public');
+        }
+
+        Books::create([
+            'id_books' => $newId,
+            'title_books' => $request->title,
+            'author' => $request->author,
+            'img_books' => $imagePath,
+            'description' => $request->description,
+            'pages' => $request->pages,
+            'publisher' => $request->publisher,
+            'year_published' => $request->year_publish,
+            'qty_books' => $request->quantity,
+            'id_bookshelf' => $request->bookshelf,
+        ]);
+
+        return redirect()->route('admin.books.index')->with('success', 'Buku berhasil ditambahkan.');
     }
-    $newId = $prefix . str_pad($number, 4, '0', STR_PAD_LEFT);
 
-    // 4. Simpan gambar jika ada
-    $imageName = null;
-    if ($request->hasFile('image')) {
-        $imageName = time() . '.' . $request->image->extension();
-        $request->image->move(public_path('images'), $imageName);
-    }
-
-    // 5. Simpan ke tabel books
-    $book = new Books();
-    $book->id_books = $newId;
-    $book->title_books = $request->title;
-    $book->author = $request->author;
-    $book->description = $request->description;
-    $book->pages = $request->pages;
-    $book->publisher = $request->publisher;
-    $book->year_published = $request->year_publish;
-    $book->qty_books = $request->quantity;
-    $book->img_books = $imageName;
-    $book->id_bookshelf = $request->bookshelf;
-    $book->save();
-
-    // 6. Simpan relasi ke tabel category_books
-    CategoryBook::create([
-        'id_books' => $newId,
-        'id_book_class' => $request->category,
-        'id_bookshelf' => $request->bookshelf
-    ]);
-
-    return redirect()->route('books.index')->with('success', 'Buku berhasil ditambahkan!');
-}
 
 
 
@@ -127,6 +125,7 @@ public function store(Request $request)
 
     public function destroy(Books $book)
     {
+        // Implementasi destroy sesuai kebutuhan
         $book->delete();
         return back()->with('message', 'Buku berhasil dihapus.');
     }
