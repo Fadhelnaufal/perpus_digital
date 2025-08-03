@@ -16,8 +16,8 @@ return new class extends Migration
             $table->unsignedBigInteger('id_order');
             $table->foreign('id_order')->references('id')->on('book_orders')->onDelete('cascade');// Foreign key reference to users table
 
-            $table->string('id_books');
-            $table->foreign('id_books')->references('id_books')->on('inventories')->onDelete('cascade'); // Foreign key reference to users table
+            $table->string('code_books');
+            $table->foreign('code_books')->references('code')->on('inventories')->onDelete('cascade'); // Foreign key reference to users table
 
 
             $table->foreignId('id_category')->constrained('category_books')->references('id')->onDelete('cascade'); // Foreign key reference to users table

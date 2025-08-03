@@ -26,11 +26,11 @@
                     </li>
 
                     {{-- FULLSCREEN --}}
-                    <li class="header-right-item">
+                    {{-- <li class="header-right-item">
                         <button class="fullscreen-btn bg-transparent p-0 border-0" id="fullscreen-button">
                             <i class="material-symbols-outlined text-body">fullscreen</i>
                         </button>
-                    </li>
+                    </li> --}}
 
                     {{-- NOTIFICATIONS --}}
                     <li class="header-right-item">

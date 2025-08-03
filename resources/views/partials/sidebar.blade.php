@@ -19,8 +19,7 @@
                 </li>
 
                 <!-- Dashboard -->
-                <li
-                    class="menu-item {{ Request::is('dashboard') ? 'open' : '' }}">
+                <li class="menu-item {{ Request::is('dashboard') ? 'open' : '' }}">
                     <a href="{{ route('admin.dashboard') }}"
                         class="menu-link {{ Request::is('admin/dashboard') ? 'active' : '' }}">
                         <span class="material-symbols-outlined menu-icon">dashboard</span>
@@ -58,8 +57,7 @@
                             </a>
                         </li>
                         <li class="menu-item">
-                            <a href=""
-                                class="menu-link {{ Request::is('inventory*') ? 'active' : '' }}">
+                            <a href="" class="menu-link {{ Request::is('inventory*') ? 'active' : '' }}">
                                 Inventory
                             </a>
                         </li>
@@ -108,7 +106,7 @@
                     </a>
                     <ul class="menu-sub {{ Request::is('admin/users*') ? 'show' : '' }}">
                         <li class="menu-item">
-                           <a href="{{ route('admin.users.index') }}"
+                            <a href="{{ route('admin.users.index') }}"
                                 class="menu-link {{ Request::is('admin/users') ? 'active' : '' }}">
                                 Add User and Role
                             </a>
@@ -157,10 +155,34 @@
                     <span class="menu-title-text">MAIN</span>
                 </li>
                 <li class="menu-item">
-                    <a href="" class="menu-link {{ Request::is('dashboard') ? 'active' : '' }}">
+                    <a href="{{ route('student.dashboard') }}"
+                        class="menu-link {{ Request::is('student/dashboard') ? 'active' : '' }}">
                         <span class="material-symbols-outlined menu-icon">dashboard</span>
                         <span class="title">Dashboard</span>
                     </a>
+                </li>
+
+                <li class="menu-item {{ Request::is('student/book-orders*') ? 'open' : '' }}">
+                    <a href="javascript:void(0);"
+                        class="menu-link menu-toggle {{ Request::is('student/book-orders*') ? 'active' : '' }}">
+                        <span class="material-symbols-outlined menu-icon">bookmark</span>
+                        <span class="title">Peminjaman Buku</span>
+                    </a>
+                    <ul class="menu-sub {{ Request::is('student/book-orders*') ? 'show' : '' }}">
+                        <li class="menu-item">
+                            <a href="{{ route('student.book-orders.index') }}"
+                                class="menu-link {{ Request::is('student/book-orders') ? 'active' : '' }}">
+                                Peminjaman Buku
+                            </a>
+                        </li>
+                        <li class="menu-item">
+                            <a href="#" class="menu-link">
+                                Pengembalian Buku
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
         @endif
     </aside>
 </div>

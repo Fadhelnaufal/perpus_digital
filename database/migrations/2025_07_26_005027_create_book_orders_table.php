@@ -12,24 +12,28 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('book_orders', function (Blueprint $table) {
-            $table->id();
-            $table->string('id_students');
-            $table->foreign('id_students')->references('id_students')->on('students')->onDelete('cascade');// Foreign key reference to users table
+    $table->id();
 
-            $table->string('id_books');
-            $table->foreign('id_books')->references('id_books')->on('books')->onDelete('cascade'); // Foreign key reference to users table
-            $table->integer('qty_books');
-            $table->string('id_books_class');
-            $table->date('order_date');
-            $table->date('return_date');
-            $table->integer('period');
+    $table->unsignedBigInteger('user_id');
+    $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
 
-            $table->unsignedBigInteger('id_penalty');
-            $table->foreign('id_penalty')->references('id')->on('penaltys')->onDelete('cascade');
+    $table->string('code_books');
+    $table->foreign('code_books')->references('code')->on('books')->onDelete('cascade');
 
-           $table->foreignId('approve_by')->nullable()->constrained('admins')->onDelete('cascade');
-            $table->timestamps();
-        });
+    $table->integer('qty_books');
+    $table->string('id_books_class');
+    $table->date('order_date');
+    $table->date('return_date');
+    $table->integer('period');
+
+    $table->unsignedBigInteger('id_penalty')->nullable();
+    $table->foreign('id_penalty')->references('id')->on('penaltys')->onDelete('cascade');
+
+    $table->foreignId('approve_by')->nullable()->constrained('admins')->onDelete('cascade');
+
+    $table->timestamps();
+});
+
     }
 
     /**

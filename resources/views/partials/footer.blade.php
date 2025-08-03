@@ -1,12 +1,11 @@
 <footer class="footer-area bg-white text-center rounded-top-7">
     <p class="fs-14">
-        © <span class="text-primary-div">Trezo</span> is Proudly
-        Owned by
+        © <span class="text-primary-div">Pusdiglah</span> is Developed by
         <a
-            href="https://envytheme.com/"
+            href="https://badakmenyelam-dev.vercel.app/"
             target="_blank"
             class="text-decoration-none text-primary"
-            >EnvyTheme</a
+            >Badakdev</a
         >
     </p>
 </footer>

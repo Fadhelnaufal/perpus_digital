@@ -38,12 +38,12 @@
                     </div>
                     <div class="col-sm">
                         <div
-                            class="card bg-primary bg-opacity-10 border-primary border-opacity-10 rounded-3 stats-box style-three border-0 rounded-3 mb-4">
+                            class="card bg-primary bg-opacity-10 border-primary border-opacity-10 rounded-3 stats-box style-three border-0 rounded-3 mb-4 ">
                             <div class="card-body p-4">
                                 <div class="d-flex">
                                     <div class="flex-grow-1 me-3">
                                         <span class="d-block mb-1">Jumlah Buku</span>
-                                        <h2 class="text-secondary fs-32">32</h2>
+                                        <h2 class="text-secondary fs-32">{{ $totalBooks }}</h2>
                                     </div>
                                     <div class="flex-shrink-0">
                                         <span class="material-symbols-outlined fs-2">book_2</span>
@@ -59,7 +59,7 @@
                                 <div class="d-flex">
                                     <div class="flex-grow-1 me-3">
                                         <span class="d-block mb-1">Jumlah Siswa</span>
-                                        <h2 class="text-secondary fs-32">32</h2>
+                                        <h2 class="text-secondary fs-32">{{ $totalStudents }}</h2>
                                     </div>
                                     <div class="flex-shrink-0">
                                         <span class="material-symbols-outlined fs-2">school</span>
@@ -76,7 +76,7 @@
                                 <div class="d-flex">
                                     <div class="flex-grow-1 me-3">
                                         <span class="d-block mb-1">Jumlah guru</span>
-                                        <h2 class="text-secondary fs-32">32</h2>
+                                        <h2 class="text-secondary fs-32">{{ $totalTeachers }}</h2>
                                     </div>
                                     <div class="flex-shrink-0">
                                         <span class="material-symbols-outlined fs-2">supervisor_account</span>

@@ -10,7 +10,7 @@ class CategoryBook extends Model
    use HasFactory;
 
    protected $fillable = [
-    'id_books',
+    'code',
     'id_book_class',
     'id_bookshelf',
    ];

@@ -70,7 +70,7 @@
                                             <tbody>
                                                 @forelse ($books as $book)
                                                     <tr>
-                                                        <td class="text-body">{{ $book->id_books }}</td>
+                                                        <td class="text-body">{{ $book->code }}</td>
                                                         <td>
                                                             <div class="d-flex align-items-center">
                                                                 <img src="{{ asset('storage/' . $book->img_books) }}"
@@ -100,12 +100,12 @@
                                                                 <button
                                                                     class="ps-0 border-0 bg-transparent lh-1 position-relative top-2"
                                                                     data-bs-toggle="tooltip" data-bs-placement="top"
-                                                                    data-bs-title="Edit">
+                                                                    data-bs-title="Edit" onclick="location.href='{{ route('admin.books.edit', $book->code) }}'">
                                                                     <i
                                                                         class="material-symbols-outlined fs-16 text-body">edit</i>
                                                                 </button>
                                                                 <form
-                                                                    action="{{ route('admin.books.destroy', $book->id_books) }}"
+                                                                    action="{{ route('admin.books.destroy', $book->code) }}"
                                                                     method="POST"
                                                                     onsubmit="return confirm('Yakin ingin menghapus buku ini?')">
                                                                     @csrf

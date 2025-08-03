@@ -14,13 +14,21 @@ class StudentController extends Controller
     {
         return view('students.dashboard');
     }
+    /**
+     * Display a listing of the book orders.
+     */
+    public function bookOrders()
+    {
+        // Logic to retrieve book orders for the student
+        return view('students.book-orders.index');
+    }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function createBookOrder()
     {
-        //
+        return view('students.book-orders.create');
     }
 
     /**

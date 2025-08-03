@@ -8,22 +8,24 @@ class Books extends Model
 {
     protected $table = 'books';
 
-    protected $primaryKey = 'id_books';
+    protected $primaryKey = 'code';
     public $incrementing = false;
     protected $keyType = 'string';
 
-    protected $fillable = [
-        'id_books',
-        'title_books',
-        'author',
-        'description',
-        'pages',
-        'publisher',
-        'year_published',
-        'qty_books',
-        'img_books',
-        'id_bookshelf'
-    ];
+   protected $fillable = [
+    'code',
+    'title_books',
+    'author',
+    'description',
+    'pages',
+    'publisher',
+    'year_published',
+    'qty_books',
+    'img_books',
+    'id_bookshelf',
+    'id_book_class', // pastikan ini kolom kategori
+];
 
-    
+
+
 }

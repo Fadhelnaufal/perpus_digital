@@ -11,6 +11,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\BooksClassController;
 use App\Http\Controllers\BooksShelfController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\BookOrderController;
 use Illuminate\Support\Facades\Auth;
 
 // Display the form to create a new book class
@@ -64,11 +65,26 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
     Route::resource('books-shelf', BooksShelfController::class);
 });
 
-Route::middleware(['auth', 'role:teacher'])->group(function() {
-    Route::get('/teacher/dashboard', [TeacherController::class, 'index'])->name('teacher.dashboard');
+
+
+Route::middleware(['auth', 'role:student'])->prefix('student')->name('student.')->group(function () {
+    Route::get('/dashboard', [StudentController::class, 'index'])->name('dashboard');
+    Route::get('/book-orders', [BookOrderController::class, 'index'])->name('book-orders.index');
+    Route::get('/book-orders/create', [BookOrderController::class, 'createBookOrder'])->name('book-orders.create');
+    Route::post('/book-orders', [BookOrderController::class, 'store'])->name('book-orders.store');
+    // Route::get('/book-orders/{order}/edit', [BookOrderController::class, 'edit'])->name('book-orders.edit');
+    // Route::put('/book-orders/{order}', [BookOrderController::class, 'update'])->name('book-orders.update');
+    // Route::delete('/book-orders/{order}', [BookOrderController::class, 'destroy'])->name('book-orders.destroy');
 });
 
-Route::middleware(['auth', 'role:student'])->group(function() {
-    Route::get('/student/dashboard', [StudentController::class, 'index'])->name('student.dashboard');
+Route::middleware(['auth', 'role:teacher'])->prefix('teacher')->name('teacher.')->group(function () {
+    Route::get('/dashboard', [TeacherController::class, 'index'])->name('dashboard');
+    Route::get('/book-orders', [BookOrderController::class, 'index'])->name('book-orders.index');
+    Route::get('/book-orders/create', [BookOrderController::class, 'createBookOrder'])->name('book-orders.create');
+    Route::post('/book-orders', [BookOrderController::class, 'store'])->name('book-orders.store');
+    // Route::get('/book-orders/{order}/edit', [BookOrderController::class, 'edit'])->name('book-orders.edit');
+    // Route::put('/book-orders/{order}', [BookOrderController::class, 'update'])->name('book-orders.update');
+    // Route::delete('/book-orders/{order}', [BookOrderController::class, 'destroy'])->name('book-orders.destroy');
 });
+
 

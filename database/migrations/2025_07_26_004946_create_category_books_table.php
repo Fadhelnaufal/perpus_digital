@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('category_books', function (Blueprint $table) {
             $table->id();
-            $table->string('id_books');
-            $table->foreign('id_books')->references('id_books')->on('books')->onDelete('cascade');
+            $table->string('code_books');
+            $table->foreign('code_books')->references('code')->on('books')->onDelete('cascade');
 // Foreign key reference to users table
 
             $table->string('id_book_class');

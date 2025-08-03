@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('dashboard_books', function (Blueprint $table) {
             $table->id();
-            $table->string('id_books');
-            $table->foreign('id_books')->references('id_books')->on('books')->onDelete('cascade'); // Foreign key reference to users table
+            $table->string('code_books');
+            $table->foreign('code_books')->references('code')->on('books')->onDelete('cascade'); // Foreign key reference to users table
             $table->string('title_books');
             $table->string('author');
             $table->string('img_books')->nullable();

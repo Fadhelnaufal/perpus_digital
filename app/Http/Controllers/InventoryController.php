@@ -28,13 +28,13 @@ class InventoryController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'id_books' => 'required|exists:books,id_books',
+            'code_books' => 'required|exists:books,code',
             'id_books_shelves' => 'required|exists:books_shelves,id_bookshelf',
             'qty_books' => 'required|integer|min:1',
         ]);
 
         Inventory::create([
-            'id_books' => $validated['id_books'],
+            'code_books' => $validated['code_books'],
             'id_books_shelves' => $validated['id_books_shelves'],
             'qty_books' => $validated['qty_books'],
         ]);
@@ -59,7 +59,7 @@ class InventoryController extends Controller
         ]);
 
         $inventory->update([
-            'id_books' => $validated['id_books'],
+            'code_books' => $validated['code_books'],
             'id_books_shelves' => $validated['id_books_shelves'],
             'qty_books' => $validated['qty_books'],
         ]);

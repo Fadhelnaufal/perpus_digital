@@ -14,9 +14,9 @@ return new class extends Migration
        Schema::create('inventories', function (Blueprint $table) {
             $table->id();
 
-            $table->string('id_books');
-            $table->foreign('id_books')
-                ->references('id_books')
+            $table->string('code');
+            $table->foreign('code')
+                ->references('code')
                 ->on('books')
                 ->onDelete('cascade');
 
